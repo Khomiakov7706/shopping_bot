@@ -1,5 +1,6 @@
 from aiogram import F, Router, types
 from aiogram.filters import Command
+from aiogram.fsm.state import StatesGroup, State
 
 from filters.chat_types import ChatTypeFilter, IsAdmin
 from input_keyboards.reply import get_keyboard
@@ -40,6 +41,12 @@ async def delete_product(message: types.Message):
 
 
 #Код ниже для машины состояний (FSM)
+
+class AddProduct(StatesGroup): #импортируем 
+    name = State()
+    description = State()
+    price = State()
+    image = State()
 
 @admin_router.message(F.text == "Добавить товар")
 async def add_product(message: types.Message):
